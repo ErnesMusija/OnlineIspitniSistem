@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ispit.naziv_ispita}}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+</head>
+<body>
+<br><br>
+{% if pk < ukupno_pitanja %}
+<center><a style="font-size:20px;color:white;">Preostalo vrijeme u sekundama:</a>
+<div style="font-size:30px;color:red" id="timer">{{ timer }}</div>
+</center>
+{% endif %}
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+{% if pk == 11 %}
+
+<center><a style="font-size:25px;color:white;">
+    Ispit nije pokrenut ili nije ocjenjen!
+</a><br>
+     <button onclick="window.location.href='/pridruzivanje_ispitu'" style="margin-top: 20px;font-size:30px;color:black">Nazad</button>
+</center>
+{% elif pk < ukupno_pitanja %}
+
+<center><a style="font-size:25px;color:white;">
+    <br><br><br>
+    {{pitanje.tekst}}
+</a> </center>
+
+{% if zaokruzi %}
+
+<script>
+    function checkSelected() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        var isChecked = false;
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                isChecked = true;
+                break;
+            }
+        }
+        if (!isChecked) {
+            document.querySelector('input[name="0"]').value = "ne_oznaceno";
+        }
+    }
+</script>
+<center><form method="post" id="forma" onsubmit="checkSelected()">
+    {% csrf_token %}
+
+        {% for i in ponudjeni_odgovori %}
+
+     <div class="checkbox-label">
+            <label for="{{i}}">{{i}}</label>
+            <input type="checkbox" id="{{i}}" name="0" value="{{i}}">
+         <br><br><br>
+
+        </div>
+
+    {% endfor %}
+    <input type="submit" value="Potvrdi"/>
+</form></center>
+<script>
+
+  var timerLength = {{ sekunde }} * 1000; // Convert to milliseconds
+
+  var timer = setInterval(function() {
+
+    timerLength -= 1000;
+
+    document.getElementById('timer').innerHTML = timerLength / 1000;
+
+    if (timerLength <= 0) {
+      clearInterval(timer);
+      document.getElementById('forma').submit();
+    }
+  }, 1000);
+</script>
+{% else %}
+<form method="post" style="margin-top:25px">
+     {% csrf_token %}
+  <textarea id="odg" name="odg" rows="10" cols="50"></textarea>
+  <br>
+  <input type="submit" value="Potvrdi">
+</form>
+    <script>
+
+  var timerLength = {{ sekunde }} * 1000; // Convert to milliseconds
+
+  var timer = setInterval(function() {
+
+    timerLength -= 1000;
+
+    document.getElementById('timer').innerHTML = timerLength / 1000;
+
+    if (timerLength <= 0) {
+      clearInterval(timer);
+      document.getElementById('forma').submit();
+    }
+  }, 1000);
+</script>
+{% endif %}
+    </div>
+{% else %}
+<center>
+<a style="font-size:20px;color:white;">Uspjesno ste zavrsili polaganje ovog ispita!</a><br>
+ <button onclick="window.location.href='/'" style="margin-top: 20px;font-size:30px;color:black;font-weight:bold;">Nazad</button>
+    </center>
+{% endif %}
+
+</body>
+</html>

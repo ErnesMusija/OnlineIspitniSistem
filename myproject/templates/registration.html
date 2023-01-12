@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registracija</title>
+	  <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+  </head>
+  <body>
+    <h1>Registracija</h1>
+    <p>Molimo popunite formu sa odgovarjucim informacijama</p>
+    <form action="registration" method="POST">
+      {% csrf_token %}
+      <fieldset>
+        <label>Unesite ime: <input type="text" name="name" required /></label>
+        <label>Unesite prezime: <input type="text" name="lastname" required /></label>
+        <label>Unesite vas  Email: <input type="email" name="email" required /></label>
+        <label>Unesite sifru: <input type="password" name="password"  required /></label>
+        <label>Potvrdite sifru: <input type="password" name="confirm_password"  required /></label>
+        <label>Unesite korisnicko ime/username: <input type="text" name="username" required /></label>
+      </fieldset>
+      <fieldset>
+        <label>Izaberite ulogu koju zelite imati na ovom racunu:</label>
+        <label><input type="radio" name="acc_type" value = 'P' class="inline" /> Polagac</label>
+        <label><input type="radio" name="acc_type" value = 'Z' class="inline" /> Zadavac</label>
+      </fieldset>
+
+      <input type="submit" value="Potvrdi" />
+    </form>
+  </body>
+</html>
