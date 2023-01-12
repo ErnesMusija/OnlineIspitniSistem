@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezultat iz {{ocjenjivanje.ispit.naziv_ispita}}</title>
+      <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+</head>
+<body>
+<center style="padding-top:200px">
+    <a style="font-size:25px;">Osvojili ste:  </a> <a style="font-size:25px;color:red">{{ocjenjivanje.osvojeni_bodovi}}/{{max_bodovi}} bodova i ocjenu {{ocjenjivanje.ocjena}}/{{max_ocjena}} </a><br>
+   <br> <a style="font-size:25px;">Napomene i kritike: </a><br><br>
+    <a style="font-size:20px;color:red">{{ocjenjivanje.napomene}} </a>
+</center>
+</body>
+</html>

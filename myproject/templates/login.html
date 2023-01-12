@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prijava</title>
+	  <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+  </head>
+  <body>
+    <h1>Prijava</h1>
+    <p>Molimo unesite odgovarajuce informacije</p>
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    <form action="login" method="POST">
+      {% csrf_token %}
+
+      <fieldset>
+        <label>Email: <input type="email" name="email" required /></label>
+        <label>Sifra: <input type="password" name="password"  required /></label>
+      </fieldset>
+      <input type="submit" value="Potvrdi" />
+    </form>
+  </body>
+</html>

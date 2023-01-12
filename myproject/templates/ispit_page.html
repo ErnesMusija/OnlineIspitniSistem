@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ispit.naziv_ispita}}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+</head>
+<body>
+<center>
+    <table style="margin-top:20px;">
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;">Naziv ispita </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.naziv_ispita }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Ispitni kod </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.ispitni_kod }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Ukupan broj polagaca </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.ukupan_broj_polagaca }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Vrijeme trajanja </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.vrijeme_trajanja }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Broj inicijalizacija </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.broj_inicijalizacija }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Oblast ispita </th>
+    <td style="border: 3px solid black; color:red; font-size:20px;"> {{ ispit.oblast_ispita }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Maksimalna moguca ocjena </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.max_ocjena }} </td>
+  </tr>
+    <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Minimalna prolzana ocjena </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.min_ocjena }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Broj pitanja sa ponudjenim odgovorima </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.broj_zaokruzi_pitanja }} </td>
+  </tr>
+    <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Broj zadataka </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.broj_zadataka }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Zadavac </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.zadavac }} </td>
+  </tr>
+  <tr>
+    <th style="border: 3px solid black; color:white; font-size:20px;padding-top: 10px;"> Datum formiranja </th>
+    <td style="border: 3px solid black; color:red; font-size:20px"> {{ ispit.datum_formiranja }} </td>
+  </tr>
+</table></center>
+  <center>
+  <button onclick="window.location.href='/lista_ispita'" style="margin-top: 20px;font-size:30px;color:black;font-weight:bold">Nazad</button>
+    <button onclick="window.location.href='{% url 'pokrenut_ispit' ispit.id %}'" style="margin-top: 20px;font-size:30px;color:black;font-weight:bold">Pokreni ispit</button>
+</center>
+</body>
+</html>

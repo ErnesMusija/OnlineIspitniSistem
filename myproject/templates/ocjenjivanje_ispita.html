@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ocjenjivanje ispita</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+</head>
+<body>
+{% if pk < duzina %}
+<br><br><br><br>
+
+    <a style="font-size:23px;color:white;margin-left:20px;">Tekst vaseg pitanja:<div style="margin-left:20px;display:inline-block;"><a style="font-size:20px;color:white;padding:5px;">{{trenutni_odgovor.zadatak.tekst}}</a></div></a><br><br>
+    <a style="font-size:23px;color:white;margin-left:20px;">Polagacev odgovor:<div style="margin-left:20px;display:inline-block;"><a style="font-size:20px;color:white;padding:5px;">{{trenutni_odgovor.odgovor}}</a></div></a><br>
+</div>
+<br><br>
+<form method="post">
+     {% csrf_token %}
+  <label for="bodovi" style="font-size:20px;color:red;">Unesite broj bodova koje dodjeljujete za ovaj odgovor:</label>
+  <input type="number" id="bodovi" name="bodovi" max="{{trenutni_odgovor.zadatak.max_bodovi}}"><br>
+  <input type="submit" value="Potvrdi">
+</form>
+
+{% elif pk == duzina %}
+
+<form method="post" style="margin-top:170px">
+     {% csrf_token %}
+  <label for="ocjena" style="font-size:20px;">Unesite ocjenu ako polagac ima {{ocjenjivanje.osvojeni_bodovi}}/{{max_bodovi}} osvojenih bodova:</label>
+  <input type="number" id="ocjena" name="ocjena" max="{{ispit.max_ocjena}}" min="{{ispit.min_ocjena}}"><br>
+    <label for="napomena" style="font-size:20px;">Unesite bilo kakve napomene ili kritike</label>
+     <input type="text" id="napomena" name="napomena"><br>
+  <input type="submit" value="Potvrdi">
+</form>
+
+{% else %}
+<div style="padding-top:200px;text-align:center">
+    <label style="font-size:25px;">Uspjesno ocjenjen ispit! Polagac sada moze vidjeti rezultat</label>
+    <button onclick="window.location.href='/neocjenjeni_ispiti'" style="font-size:30px;color:black;font-weight:bold">Povratak</button>
+</div>
+
+{% endif %}
+</body>
+</html>

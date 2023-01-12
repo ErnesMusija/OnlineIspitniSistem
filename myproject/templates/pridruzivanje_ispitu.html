@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pridruzivanje ispitu</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel = "icon" href ="https://cdn-icons-png.flaticon.com/512/234/234618.png">
+</head>
+<body>
+<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+ <center><a style="font-size:30px;color:white;">Unesite ispitni kod:</a></center>
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    <form action="pridruzivanje_ispitu" method="POST">
+      {% csrf_token %}
+      <fieldset>
+        <label><input style="font-size:25px;" type="text" name="ispitni_kod" required /></label>
+      </fieldset>
+      <input type="submit" value="Potvrdi"/>
+    </form>
+    </div>
+</body>
+</html>
